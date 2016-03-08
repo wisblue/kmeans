@@ -110,3 +110,20 @@ func CanberraDistance(firstVector, secondVector []float64) (float64, error) {
 	return distance, nil
 }
 
+// given longitude and latitude of two points, calculate the distance between
+// the two points by  great-circle distance method.
+// ref http://www.movable-type.co.uk/scripts/latlong.html
+func EarthDistance(firstVector, secondVector []float64) (float64, error) {
+	var R float64 = 6378137 // radius of the earth in meter
+	toRadians := func(d float64) float64 {
+		return d * math.Pi / 180.0
+	}
+
+	lat1 := toRadians(firstVector[1])
+	lat2 := toRadians(secondVector[1])
+	dLng := toRadians(secondVector[0] - firstVector[0])
+
+	c := math.Acos(math.Sin(lat1)*math.Sin(lat2)+math.Cos(lat1)*math.Cos(lat2)*math.Cos(dLng)) * R
+
+	return c, nil
+}
