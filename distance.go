@@ -39,18 +39,18 @@ func ManhattanDistance(firstVector, secondVector []float64) (float64, error) {
 
 // 2-norm distance (l_2 distance)
 func EuclideanDistance(firstVector, secondVector []float64) (float64, error) {
-	distance := 0.
-	for ii := range firstVector {
-		distance += (firstVector[ii] - secondVector[ii]) * (firstVector[ii] - secondVector[ii])
-	}
-	return math.Sqrt(distance), nil
+	distance, err := SquaredEuclideanDistance(firstVector, secondVector)
+	return sqrt(distance), err
 }
 
 // Higher weight for the points that are far apart
 // Not a real metric as it does not obey triangle inequality
 func SquaredEuclideanDistance(firstVector, secondVector []float64) (float64, error) {
-	distance, err := EuclideanDistance(firstVector, secondVector)
-	return distance * distance, err
+	distance := 0.
+	for ii := range firstVector {
+		distance += (firstVector[ii] - secondVector[ii]) * (firstVector[ii] - secondVector[ii])
+	}
+	return distance, nil
 }
 
 // p-norm distance (l_p distance)
@@ -108,3 +108,4 @@ func CanberraDistance(firstVector, secondVector []float64) (float64, error) {
 	}
 	return distance, nil
 }
+
