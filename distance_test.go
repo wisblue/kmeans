@@ -247,3 +247,16 @@ func TestCanberraDistance(t *testing.T) {
 		t.Errorf("Computed Canberra Distance: %f\n Actual Canberra Distance: %f", firstComputed, firstActual)
 	}
 }
+
+
+func TestEarthDistance(t *testing.T) {
+	f := []float64{121.482221, 31.220985, 0} // Beijing
+	s := []float64{116.407398, 39.903978, 0} // Shanghai
+
+	d, _ := EarthDistance(s, f)
+
+	if math.Abs(d-1069000.0) > 1000 {
+		t.Errorf("Computed distance from Beijing to Shanghai is %f\n", d)
+	}
+
+}
