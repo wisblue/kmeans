@@ -45,7 +45,7 @@ func EuclideanDistance(firstVector, secondVector []float64) (float64, error) {
 
 // Higher weight for the points that are far apart
 // Not a real metric as it does not obey triangle inequality
-func SqureEuclideanDistance(firstVector, secondVector []float64) (float64, error) {
+func SquaredEuclideanDistance(firstVector, secondVector []float64) (float64, error) {
 	distance := 0.
 	for ii := range firstVector {
 		d := firstVector[ii] - secondVector[ii]
