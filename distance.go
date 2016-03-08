@@ -121,9 +121,10 @@ func EarthDistance(firstVector, secondVector []float64) (float64, error) {
 
 	lat1 := toRadians(firstVector[1])
 	lat2 := toRadians(secondVector[1])
+	dLat := lat2 - lat1
 	dLng := toRadians(secondVector[0] - firstVector[0])
+	c := 2.0 * math.Asin(math.Sqrt(math.Pow(math.Sin(dLat/2.0), 2)+
+		math.Cos(lat1)*math.Cos(lat2)*math.Pow(math.Sin(dLng/2.0), 2)))
 
-	c := math.Acos(math.Sin(lat1)*math.Sin(lat2)+math.Cos(lat1)*math.Cos(lat2)*math.Cos(dLng)) * R
-
-	return c, nil
+	return c * R, nil
 }
